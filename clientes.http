@@ -1,0 +1,12 @@
+POST http://localhost:8080/clientes/3/transacoes
+Content-Type: application/json
+
+{
+  "tipo": "d",
+  "valor": 1000000,
+  "descricao": "uber"
+}
+
+###
+GET http://localhost:8080/clientes/3/extrato
+
