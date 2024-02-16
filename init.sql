@@ -1,6 +1,6 @@
 CREATE TABLE clientes
 (
-    id     SERIAL NOT NULL,
+    id BIGSERIAL NOT NULL,
     limite BIGINT NOT NULL,
     saldo  BIGINT,
     CONSTRAINT pk_clientes PRIMARY KEY (id)
@@ -8,7 +8,7 @@ CREATE TABLE clientes
 
 CREATE TABLE transacoes
 (
-    id         BIGINT                      NOT NULL,
+    id BIGSERIAL NOT NULL,
     valor      BIGINT                      NOT NULL,
     tipo       CHAR                        NOT NULL,
     descricao  VARCHAR(10)                 NOT NULL,
