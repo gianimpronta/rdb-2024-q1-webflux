@@ -23,7 +23,7 @@ public class Transacoes {
     private Long valor;
 
     @Column(name = "tipo", nullable = false)
-    private char tipo;
+    private String tipo;
 
     @Column(name = "descricao", nullable = false, length = 10)
     private String descricao;

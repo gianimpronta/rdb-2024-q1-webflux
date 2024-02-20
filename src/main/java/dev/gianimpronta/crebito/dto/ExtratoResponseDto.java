@@ -14,7 +14,7 @@ public record ExtratoResponseDto(SaldoDto saldo, List<TransacoesDto> ultimas_tra
     /**
      * DTO for {@link Transacoes}
      */
-    public record TransacoesDto(Long valor, char tipo, String descricao, LocalDateTime realizada_em) implements Serializable {
+    public record TransacoesDto(Long valor, String tipo, String descricao, LocalDateTime realizada_em) implements Serializable {
     }
 
     public record SaldoDto(Long total, LocalDateTime data_extrato, Long limite) implements Serializable {
