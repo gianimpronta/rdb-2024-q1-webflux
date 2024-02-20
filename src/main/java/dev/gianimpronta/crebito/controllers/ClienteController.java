@@ -8,6 +8,8 @@ import dev.gianimpronta.crebito.repositories.ClienteRepository;
 import dev.gianimpronta.crebito.repositories.TransacoesRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -24,6 +26,7 @@ public class ClienteController {
         this.transacoesRepository = transacoesRepository;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @PostMapping("/clientes/{id}/transacoes")
     public TransacoesResponseDto transacao(@RequestBody @Valid TransacoesRequestDto request, @PathVariable Long id) {
         Long valor = Long.parseLong(request.valor().toString());
@@ -42,6 +45,7 @@ public class ClienteController {
         throw new TransacaoInvalidaException();
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @GetMapping("/clientes/{id}/extrato")
     public ExtratoResponseDto extrato(@PathVariable Long id) {
         return clienteRepository.findById(id).map(cliente -> {

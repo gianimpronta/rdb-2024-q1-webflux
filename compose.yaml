@@ -12,8 +12,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.17"
-          memory: "10MB"
+          cpus: "0.1"
+          memory: "30MB"
 
   db:
     image: postgres:latest
@@ -33,8 +33,8 @@ services:
           # aqui declarados é de 1.5 unidades de CPU e 550MB
           # de memória. A distribuição feita aqui é apenas
           # um exemplo – distribua como quiser.
-          cpus: "0.13"
-          memory: "140MB"
+          cpus: "0.1"
+          memory: "80MB"
 
   api01: &api
     # Lembre-se de que seu serviço HTTP deve estar hospedado num repositório
@@ -54,8 +54,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: "200MB"
+          cpus: "0.65"
+          memory: "220MB"
 
   api02:
     # Essa sintaxe reusa o que foi declarado em 'api01'.

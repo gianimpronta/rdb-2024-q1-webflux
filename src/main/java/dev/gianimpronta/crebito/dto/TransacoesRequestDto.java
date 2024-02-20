@@ -1,22 +1,25 @@
 package dev.gianimpronta.crebito.dto;
 
 import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * DTO for {@link dev.gianimpronta.crebito.entities.Transacoes}
  */
 public record TransacoesRequestDto(
         @PositiveOrZero
-        @Digits(fraction = 0, integer = 20)
-        BigDecimal valor,
         @NotNull
+        @Min(0)
+        Integer valor,
+        @NotNull
+        @NotEmpty
         @Pattern(regexp = "[cd]")
         String tipo,
         @NotBlank
         @NotNull
-        @Pattern(regexp = "\\w{1,10}")
+        @NotEmpty
+        @Length(max = 10)
         String descricao) implements Serializable {
 }
