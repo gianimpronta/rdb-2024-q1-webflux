@@ -1,12 +1,54 @@
+GET http://localhost:9999/clientes/6/extrato
+
+###
+GET http://localhost:9999/clientes/1/extrato
+
+###
 POST http://localhost:9999/clientes/3/transacoes
 Content-Type: application/json
 
 {
   "tipo": "d",
-  "valor": 1000000,
-  "descricao": "uber"
+  "valor": 1.2,
+  "descricao": "devolve"
 }
 
 ###
-GET http://localhost:9999/clientes/3/extrato
+POST http://localhost:9999/clientes/3/transacoes
+Content-Type: application/json
 
+{
+  "tipo": "x",
+  "valor": 1,
+  "descricao": "devolve"
+}
+
+###
+POST http://localhost:9999/clientes/3/transacoes
+Content-Type: application/json
+
+{
+  "tipo": "c",
+  "valor": 1,
+  "descricao": "123456789 e mais um pouco"
+}
+
+###
+POST http://localhost:9999/clientes/3/transacoes
+Content-Type: application/json
+
+{
+  "tipo": "c",
+  "valor": 1,
+  "descricao": ""
+}
+
+###
+POST http://localhost:9999/clientes/3/transacoes
+Content-Type: application/json
+
+{
+  "tipo": "c",
+  "valor": 1,
+  "descricao": null
+}
