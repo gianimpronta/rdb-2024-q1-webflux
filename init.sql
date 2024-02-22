@@ -1,10 +1,13 @@
-CREATE TABLE clientes
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
+CREATE TABLE IF NOT EXISTS clientes
 (
     id BIGSERIAL NOT NULL,
     limite BIGINT NOT NULL,
-    saldo  BIGINT,
     CONSTRAINT pk_clientes PRIMARY KEY (id)
 );
+create index clientes_id_idx
+    on clientes (id);
 
 CREATE TABLE transacoes
 (
@@ -16,7 +19,6 @@ CREATE TABLE transacoes
     cliente_id BIGINT                      NOT NULL,
     CONSTRAINT pk_transacoes PRIMARY KEY (id)
 );
-
 ALTER TABLE transacoes
     ADD CONSTRAINT FK_TRANSACOES_ON_CLIENTE FOREIGN KEY (cliente_id) REFERENCES clientes (id);
 

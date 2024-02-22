@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOSTNAME:localhost}:5432/${POSTGRES_DB:rinha}
+    url: jdbc:postgresql://rinha-db:5432/${POSTGRES_DB:rinha}
     username: ${POSTGRES_USER:admin}
     password: ${POSTGRES_PASSWORD:123}
   jpa:
