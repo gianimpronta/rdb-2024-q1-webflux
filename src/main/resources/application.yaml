@@ -3,6 +3,8 @@ spring:
     url: jdbc:postgresql://rinha-db:5432/${POSTGRES_DB:rinha}
     username: ${POSTGRES_USER:admin}
     password: ${POSTGRES_PASSWORD:123}
+    hikari:
+      maximum-pool-size: 25
   jpa:
     properties:
       hibernate:
