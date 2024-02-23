@@ -14,8 +14,4 @@ WORKDIR /worker
 COPY --from=builder /builder/build/libs/*.jar /worker/app.jar
 EXPOSE 8080
 
-RUN mkdir -p /usr/local/newrelic
-ADD ./newrelic/newrelic.jar /usr/local/newrelic/newrelic.jar
-ADD ./newrelic/newrelic.yml /usr/local/newrelic/newrelic.yml
-
-ENTRYPOINT ["java","-javaagent:/usr/local/newrelic/newrelic.jar", "-jar","/worker/app.jar"]
+ENTRYPOINT ["java","-javaagent:/usr/local/newrelic/newrelic.jar", "-jar","/worker/app.jar", "-Xmx200M", "-Xms100M", "-Xss156k"]
