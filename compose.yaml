@@ -26,6 +26,7 @@ services:
       - "5432:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres.conf:/etc/postgres/postgres.conf
       - rinha-db:/data/postgres
     command: postgres -c checkpoint_timeout=600 -c max_wal_size=2096 -c synchronous_commit=0 -c full_page_writes=0 -c fsync=off -c check_function_bodies=false
     healthcheck:
@@ -40,7 +41,7 @@ services:
           memory: "115MB"
 
   api01: &api
-    image: gianimpronta/rdb-2024-q1-spring-boot:jvm
+    image: gianimpronta/rdb-2024-q1-spring-boot:native
     hostname: api01
     #    environment:
     #      - DB_HOSTNAME=db
@@ -61,16 +62,6 @@ services:
     #      - DB_HOSTNAME=db
     ports:
       - "8082:8080"
-
-#  pgAdmin:
-#    image: dpage/pgadmin4
-#    environment:
-#      PGADMIN_DEFAULT_EMAIL: admin
-#      PGADMIN_DEFAULT_PASSWORD: admin
-#    ports:
-#      - "5050:80"
-#    depends_on:
-#      - db
 
 networks:
   default:
