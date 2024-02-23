@@ -24,8 +24,8 @@ ALTER TABLE transacoes
     ADD CONSTRAINT FK_TRANSACOES_ON_CLIENTE FOREIGN KEY (cliente_id) REFERENCES clientes (id);
 
 
-truncate table transacoes;
-truncate table clientes;
+truncate table transacoes cascade;
+truncate table clientes cascade;
 
 DO
 $$
