@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   nginx:
     image: nginx:latest
@@ -12,12 +14,11 @@ services:
       resources:
         limits:
           cpus: "0.1"
-          memory: "15MB"
+          memory: "30MB"
 
   rinha-db:
     image: postgres:latest
     container_name: rinha-db
-    #    hostname: db
     environment:
       - POSTGRES_PASSWORD=123
       - POSTGRES_USER=admin
@@ -38,17 +39,17 @@ services:
       resources:
         limits:
           cpus: "0.4"
-          memory: "115MB"
+          memory: "100MB"
 
   api01: &api
     image: gianimpronta/rdb-2024-q1-spring-boot:native
     hostname: api01
-    #    environment:
-    #      - DB_HOSTNAME=db
     ports:
       - "8081:8080"
     depends_on:
-      - rinha-db
+      rinha-db:
+        condition:
+          service_healthy
     deploy:
       resources:
         limits:
@@ -58,15 +59,13 @@ services:
   api02:
     <<: *api
     hostname: api02
-    #    environment:
-    #      - DB_HOSTNAME=db
     ports:
       - "8082:8080"
 
 networks:
   default:
-    driver: bridge
     name: rinha-nginx-2024q1
+    driver: bridge
 
 volumes:
   rinha-db:
