@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Slf4j
 @Getter
 @Setter
@@ -31,8 +28,5 @@ public class Cliente {
         this.limite = limite;
         this.saldo = saldo;
     }
-
-    @OneToMany(mappedBy = "cliente", orphanRemoval = true)
-    private List<Transacoes> transacoes = new ArrayList<>();
 
 }
