@@ -1,7 +1,7 @@
 package dev.gianimpronta.crebito.repositories;
 
 import dev.gianimpronta.crebito.entities.Cliente;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
-public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+public interface ClienteRepository extends ReactiveCrudRepository<Cliente, Long> {
 }

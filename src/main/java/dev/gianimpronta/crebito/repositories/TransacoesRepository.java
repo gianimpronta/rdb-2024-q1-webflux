@@ -1,11 +1,12 @@
 package dev.gianimpronta.crebito.repositories;
 
 import dev.gianimpronta.crebito.entities.Transacoes;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 
-import java.util.List;
-
-public interface TransacoesRepository extends JpaRepository<Transacoes, Long> {
-    List<Transacoes> findFirst10ByCliente_IdOrderByRealizacaoDesc(Long id);
+@Repository
+public interface TransacoesRepository extends ReactiveCrudRepository<Transacoes, Long> {
+    Flux<Transacoes> findFirst10ByCliente_IdOrderByRealizacaoDesc(Long id);
 
 }
