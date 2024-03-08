@@ -9,8 +9,8 @@
 ## Gianpaolo Impronta
 Submissão feita com:
 - `nginx` como load balancer
-- `postgres` como banco de dados
-- `java` usando o framework Spring Boot (sem usar o framework reativo)
+- `postgres` como banco de dados 
+- `java` usando o framework Spring Boot (usando Webflux)
 - [repositório da api](https://github.com/gianimpronta/rdb-2024-q1-spring-boot)
 
 [@gianimpronta](https://twitter.com/gianimpronta) @twitter
