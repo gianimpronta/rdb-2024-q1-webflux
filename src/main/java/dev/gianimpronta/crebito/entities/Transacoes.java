@@ -1,6 +1,7 @@
 package dev.gianimpronta.crebito.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,7 @@ public class Transacoes {
     private String descricao;
 
     @Column(name = "realizacao", nullable = false)
+    @JsonProperty("realizada_em")
     private LocalDateTime realizacao;
 
     @JsonIgnore

@@ -71,19 +71,31 @@ public class ClienteController {
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
     @GetMapping("/clientes/{id}/extrato")
-    public Mono<ExtratoResponseDto> extrato(@PathVariable Long id) {
+    public Mono<ResponseEntity<ExtratoResponseDto>> extrato(@PathVariable Long id) {
+        if (id < 1 || id > 5) {
+            throw new ClienteNotFoundException();
+        }
         return clienteRepository
                 .findById(id)
                 .cache()
                 .subscribeOn(Schedulers.parallel())
-                .map(cliente -> {
-                    var saldo = new ExtratoResponseDto.SaldoDto(cliente.getSaldo(), LocalDateTime.now(), cliente.getLimite());
-                    var transacoes = transacoesRepository.findFirst10ByCliente_IdOrderByRealizacaoDesc(id)
+                .map(cliente ->
+                        ExtratoResponseDto.builder()
+                                .saldo(
+                                        ExtratoResponseDto.SaldoDto.builder()
+                                                .limite(cliente.getLimite())
+                                                .total(cliente.getSaldo())
+                                                .data_extrato(LocalDateTime.now())
+                                                .build()
+                                ))
+                .flatMap(extratoResponseDtoBuilder ->
+                        transacoesRepository.findFirst10ByCliente_IdOrderByRealizacaoDesc(id)
                             .cache()
                             .subscribeOn(Schedulers.parallel())
-                            .map(trans -> new ExtratoResponseDto.TransacoesDto(trans.getValor(), trans.getTipo(), trans.getDescricao(), trans.getRealizacao()))
-                            .collectList();
-                    return Mono.just(new ExtratoResponseDto(saldo, transacoes));
-                }).orElseThrow(ClienteNotFoundException::new);
+                                .collectList()
+                                .map(trans -> extratoResponseDtoBuilder.ultimasTransacoes(trans).build())
+                )
+                .flatMap(extratoResponseDto -> Mono.just(ResponseEntity.ok(extratoResponseDto)))
+                .onErrorResume(throwable -> Mono.just(ResponseEntity.unprocessableEntity().build()));
     }
 }
